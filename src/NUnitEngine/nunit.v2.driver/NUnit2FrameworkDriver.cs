@@ -95,7 +95,7 @@ namespace NUnit.Engine.Drivers
             Core.ITest test = _runner.Test;
             // TODO: Handle error where test is null
 
-            return ResultBuilder.From(test, false);
+            return test.ToXml(false).OuterXml;
         }
 
         public int CountTestCases(TestFilter filter)
@@ -110,7 +110,7 @@ namespace NUnit.Engine.Drivers
 
             var result = _runner.Run(Core.NullListener.NULL, Core.TestFilter.Empty, false, LoggingThreshold.Off);
 
-            return ResultBuilder.From(result, true);
+            return result.ToXml(true).OuterXml;
         }
 
         public string Explore(TestFilter filter)
@@ -118,7 +118,7 @@ namespace NUnit.Engine.Drivers
             if (_runner.Test == null)
                 return String.Format(LOAD_RESULT_FORMAT, _name, _fullname, "Error loading test");
 
-            return ResultBuilder.From(_runner.Test, true);
+            return _runner.Test.ToXml(true).OuterXml;
         }
 
         public void StopRun(bool force)
