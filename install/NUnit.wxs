@@ -48,6 +48,18 @@
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate />
 
+        <!-- ***************************************************************** -->
+        <!-- **********  Define our GUI using standard WiX UI       ********** -->
+        <!-- ***************************************************************** -->
+        
+        <WixVariable Id="WixUILicenseRtf" Value="$(var.SolutionDir)License.rtf" />
+        <UIRef Id="WixUI_Mondo" />
+        <UIRef Id="WixUI_ErrorProgressText" />
+
+        <!-- ***************************************************************** -->
+        <!-- **********      Define the NUnit feature tree          ********** -->
+        <!-- ***************************************************************** -->
+        
         <Feature Id="nunit" 
                  ConfigurableDirectory="INSTALLDIR" 
                  Level="1" 
@@ -58,6 +70,10 @@
 		</Feature>
 	</Product>
 
+    <!-- ***************************************************************** -->
+    <!-- **********       Define Directory Structure            ********** -->
+    <!-- ***************************************************************** -->
+    
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
